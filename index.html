@@ -7,18 +7,33 @@
     <title>Piedra, Papel, Tijera</title>
     <script>
         // 1 es piedra - 2 papel - 3 tijera
+        aleatorio = (min, max) => {
+            return Math.floor(Math.random()*(max - min + 1)+ min);
+        }
         let jugador = 0;
-        let pc = 2;
+        let pc = aleatorio(1,3)
         jugador = prompt('elige: 1 para piedra - 2 para papel - 3 para tijera')
         
-        if(jugador == 1){
-            alert('Elegiste Piedra')
-        }else if(jugador == 2){
-            alert('Elegiste Papel')
-        }else if(jugador == 3){
-            alert('Elegiste Tijera')
+        eleccion = (anfitrion, num) => {
+            if(num == 1){
+            return alert(anfitrion +'Piedra')
+        }else if(num == 2){
+            return alert(anfitrion+'Papel')
+        }else if(num == 3){
+           return alert(anfitrion+'Tijera')
         }else{
-            alert('Opcion no valida')
+           return alert('Opcion no valida')
+        }
+        }
+        eleccion('Elegiste ',jugador);
+        eleccion('PC Eligio ', pc)
+
+        if (pc == jugador){
+            alert('==>EMPATE<==')
+        }else if((jugador == 1 && pc == 3) || (jugador == 2 && pc == 1) || jugador == 3 && pc == 2){
+            alert('> VIPTORY <')
+        }else{
+            alert('> GAME OVER <')
         }
     </script>
 </head>
