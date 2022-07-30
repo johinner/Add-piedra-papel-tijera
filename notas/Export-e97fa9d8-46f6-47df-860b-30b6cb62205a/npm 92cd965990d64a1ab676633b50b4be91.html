@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>npm</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9006f38f-7a6c-46d7-bfe6-6d4379ca0f4c" class="page sans"><header><img class="page-cover-image" src="npm%2092cd965990d64a1ab676633b50b4be91/1061199DF.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="npm%2092cd965990d64a1ab676633b50b4be91/800px-Npm-logo.svg.png"/></div><h1 class="page-title">npm</h1></header><div class="page-body"><p id="4f94b9da-7ea2-4a99-a430-a6b67dd434b7" class="">Es un gestor de paquetes, el más popular que tiene JavaScript, donde encontrarás una gran cantidad de recursos para poder implementar en tus proyectos.</p><p id="cb2c7914-ff19-44b1-b278-a5d6c710abf4" class="">Pagina Oficial:  <code> </code><code><del><em><mark class="highlight-red"><a href="https://www.npmjs.com/">https://www.npmjs.com/</a></mark></em></del></code></p><p id="d7b46b1f-4ecb-4385-a77f-f8635fd9aca0" class="">. Instalar NPM (Node Package Manager)</p><p id="cedef476-ad44-4e87-9c41-36e8b96fc535" class=""><strong><code>sudo apt-get install npm</code></strong></p><p id="e178a1ca-90ba-4b2c-8073-0c5d216bb2b2" class="">
+</p><h3 id="2cdeac3b-5f2a-43c4-850b-69f24cefee8b" class="block-color-purple_background"> Iniciar un proyecto con npm</h3><div id="8c572d9e-6099-49eb-bbbf-879ad6e4518c" class="column-list"><div id="81c85d3c-de50-4c79-b56e-95cb0bce044b" style="width:18.75%" class="column"><p id="e4770d1e-070d-4ae1-b99c-094eb2ea88b4" class=""><strong><code>npm init</code></strong><strong> </strong></p></div><div id="13a9a8eb-3892-495d-8d97-b4a2b8a4019e" style="width:81.25%" class="column"><p id="f0116bc9-72c7-4e83-8430-2f918b47b744" class="">Crear el archivo package.json el cual contiene toda la información acerca del proyecto</p></div></div><h3 id="d5ce9234-34f9-4ca3-b345-6f5d3b3516a6" class="">Datos específicos</h3><p id="d3f470e6-d674-464d-82f6-0b7855d2c266" class="">Los datos específicos ayudan a identificar el proyecto y actúan como una base para que los usuarios y los contribuidores obtengan información sobre el proyecto.</p><p id="8e9a8927-8cfd-4c48-a61e-ca6092545695" class="">El archivo <mark class="highlight-blue"><code>package.json</code></mark> estaría estructurado inicialmente por las siguientes propiedades:</p><ul id="0fc24dc9-bdc7-49ed-bac3-52c385e37ffd" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;name&quot;</strong></code></mark><strong>:</strong> Indica el nombre del proyecto.</li></ul><ul id="5d03a771-3bda-4efc-865b-5417ea6eb37d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;version&quot;</strong></code></mark><strong>:</strong> Indica la versión del proyecto.</li></ul><ul id="2a78cb41-f1b6-4034-8066-9bb268ce0fdc" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;description&quot;</strong></code></mark><strong>:</strong> Indica una breve descripción del proyecto.</li></ul><ul id="84517f90-814f-419f-8278-50a9c946c6cd" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;main&quot;</strong></code></mark><strong>:</strong> Indica el archivo principal del proyecto.</li></ul><ul id="e89c50d3-7b56-41d9-bc10-263bd6265608" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;scripts&quot;</strong></code></mark><strong>:</strong> Indica los comandos a ejecutar del proyecto.</li></ul><ul id="c6187d4e-78ee-4694-b486-26274bf921e9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;keywords&quot;</strong></code></mark><strong>:</strong> Indica las palabras clave del proyecto.</li></ul><ul id="e1a2bd0d-d20f-4db9-9dc4-9d51bb205e0a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;author&quot;</strong></code></mark><strong>:</strong> Indica el nombre y dirección de correo electrónico del propietario del proyecto.</li></ul><ul id="a7900c1e-ad28-4f72-bc7e-643881dcc1f4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><code><strong>&quot;license&quot;</strong></code></mark><strong>:</strong> Indica la licencia del proyecto.</li></ul><p id="4f0a4911-b37f-4315-b2be-fd1be1ae5fd9" class="">
+</p><div id="e0a5d649-da2d-47b8-b026-02f54c9f2c52" class="column-list"><div id="e441e8f1-a19d-4f85-8850-e22e4c09778f" style="width:25%" class="column"><p id="92420414-bddf-4c0a-b880-0bb5b5efa41f" class=""><strong><code>npm init --yes</code></strong>
+<strong><code>npm init -y</code></strong></p></div><div id="ea13fedd-acc8-48b9-87b7-d50feb24e2e8" style="width:75%" class="column"><p id="987a2be1-5f6a-4d47-b771-00b5e22c1fa0" class="">Te ayudará a crear un archivo <mark class="highlight-blue"><code>package.json</code></mark>de manera rápida con una <strong>configuración por defecto</strong>, sin la necesidad de ingresar los datos. Para establecer esta configuración por defecto, necesitarás utilizar el comando.</p></div></div><p id="034b7f68-f659-4d5a-8d08-0e26600291b4" class=""> <strong><code>npm config set init-author-name</code></strong> &quot;Tu Nombre&quot;
+ <strong><code>npm config set init-author-email</code></strong> &quot;<a href="mailto:TuEmail@email.com">TuEmail@email.com</a>&quot;
+ <strong><code>npm config set init-author-url</code></strong> &quot;<a href="https://tuweb.com/">https://tuWeb.com</a>&quot;
+ <strong><code>npm config set init-license</code></strong> &quot;MIT&quot;</p><p id="0d22fd4c-f4a1-443f-8eec-2fb3ae9b4e93" class="">
+</p><h3 id="8034e9e5-5243-430e-8dec-cbc0794f40d2" class="block-color-purple_background"> Instalación de Dependencias</h3><p id="d7e6f0ac-e418-471d-86a7-5950490e747a" class="">Son recursos que vamos a utilizar en nuestro proyecto. <strong>Las dependencias y paquetes son el conjunto de módulos para resolver un problema mayor.</strong> Saber manejar los paquetes en un proyecto permite desarrollar la aplicación más rápido sin partir desde cero.</p><div id="5ad9f5ef-7550-425c-9ad3-3bef8af854c7" class="column-list"><div id="59fa3f4a-2a5d-4151-a1b6-d2289970c16b" style="width:31.25%" class="column"><ul id="6ac62a3b-cb0b-4eb3-8b04-618bc50f7f2d" class="toggle"><li><details open=""><summary><strong>dependencias locales</strong></summary></details></li></ul><p id="1bc3d309-c729-4c9e-bfb7-19050415cdf0" class=""><strong><code>npm install &lt;paquete&gt;</code></strong></p></div><div id="c1a41fe6-7c54-41e7-8e90-3fc26293b738" style="width:68.75%" class="column"><p id="b14fa1c2-4cb9-4da3-98ea-0d1d31a15e91" class="">Son aquellas que son <strong>obligatorias para el proyecto</strong>, es decir, son las necesarias para que la aplicación funcione en producción.</p></div></div><ul id="38d8da00-967e-4a33-beb7-147b4955654b" class="toggle"><li><details open=""><summary><strong>dependencias de desarrollador</strong></summary></details></li></ul><div id="6bc560be-455e-4b33-84e8-6209b575860a" class="column-list"><div id="fbeddbcb-c586-46ff-96c5-cc02769ce6c1" style="width:43.75%" class="column"><p id="f0efe65c-1c6e-4a01-9578-ec6904701e2b" class=""><strong><code>npm install --save-dev &lt;paquete&gt;</code></strong>
+<strong><code>npm install -D &lt;paquete&gt;</code></strong></p></div><div id="97200119-4bd3-4b46-9608-5be8eee2a4c1" style="width:56.25%" class="column"><p id="8a4a76b8-9d32-451d-9576-f2975d1834be" class="">Son aquellas que <strong>no son obligatorias para el proyecto, </strong>Estas dependencias ofrecen una ayuda para construir código de forma óptima.</p></div></div><ul id="d517ee75-1be9-4625-a5d3-8076cdfd3d6a" class="toggle"><li><details open=""><summary><strong>dependencias globales</strong></summary></details></li></ul><div id="62a74504-3c7d-4379-a618-ed63d6c8074f" class="column-list"><div id="89052bed-cfb3-47f3-8e86-2bc0db84d6d0" style="width:43.75%" class="column"><p id="637de06f-c698-4fb1-918f-f0a45288228e" class=""><strong><code>npm install --global &lt;paquete&gt;</code></strong>
+<strong><code>npm install -g &lt;paquete&gt;</code></strong></p></div><div id="4ab2df58-d9c0-4a20-8a8e-81d8218e55d2" style="width:56.25%" class="column"><p id="d410ea6a-840c-4888-a3c0-15520dac5c0b" class="">son aquellas que están <strong>disponibles para todos los proyectos en tu computador</strong>.</p></div></div><ul id="af8d6f35-dcff-4714-8144-e2d49a9f35a6" class="bulleted-list"><li style="list-style-type:disc">Para ver que dependencias globales tienes instaladas, ejecuta el siguiente comando:</li></ul><p id="3903a8b8-1388-4933-bbb3-db037c08a4ce" class=""><strong><code>npm list -g --depth 0</code></strong></p><p id="acb5f807-bcf8-4aee-aa24-4f3849afe2c7" class=""><strong>Ten en cuenta que para instalar dependencias globales necesitar permisos elevados</strong></p><p id="5fa5a7e7-a204-4799-9665-02ebc17fa2eb" class="">Evita tener que usar <strong>SUDO</strong>: <mark class="highlight-brown"><em><del><a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally</a></del></em></mark></p><p id="2048f7a1-343e-4999-9e88-0573e720d284" class=""><strong>Nota:</strong> Las dependencias globales no se encuentran en el<strong> </strong><code><mark class="highlight-blue"><strong>package.json</strong></mark></code></p><p id="d6cd8d87-4e24-4655-9573-73e91c798382" class="">
+</p><ul id="da8de3f7-1e69-44a7-92eb-8f47d326fa27" class="bulleted-list"><li style="list-style-type:disc">Simular instalación de un paquete </li></ul><p id="a00f4589-7aa3-4bde-b979-7ace124d5f6d" class=""><strong><code>npm install &lt;paquete&gt; —dry-run</code></strong></p><ul id="162aa734-5070-4109-82dd-6e7acb4ee72f" class="bulleted-list"><li style="list-style-type:disc">La manera de instalar de <strong>manera forzada un paquete</strong></li></ul><p id="5f934400-b160-4453-8da1-3a844308ced9" class=""><strong><code>npm install --force &lt;paquete&gt;</code></strong>
+<strong><code>npm install -f &lt;paquete&gt;</code></strong></p><ul id="8bce9531-9be4-4f6f-95f7-88179f53641d" class="bulleted-list"><li style="list-style-type:disc">instalar todos los paquetes que se encuentran registrado en el documento <code><mark class="highlight-blue"><strong>package.json</strong></mark></code></li></ul><p id="a06d5642-f7eb-4567-8236-aedd709182a7" class=""><strong><code>npm install</code></strong></p><ul id="f05be2d1-b3bc-4ca7-81d3-66ebd607dd51" class="bulleted-list"><li style="list-style-type:disc">Instalar una versión exacta de una dependencia</li></ul><p id="3c902c76-a021-4018-834d-03255a6ba024" class=""><code><strong>npm install &lt;paquete&gt;@&lt;versión&gt;</strong></code></p><p id="03ed5540-2bf5-4f45-a413-baac27812a38" class="">
+</p><h3 id="babb6de6-2208-4d70-910c-097e374dad1f" class="block-color-purple_background"> <strong><strong>Cómo actualizar y eliminar paquetes</strong></strong></h3><ul id="1e961e01-7ad4-4670-91cb-2cd4f4828104" class="bulleted-list"><li style="list-style-type:disc">Revisar que paquetes disponen de nuevas versiones</li></ul><div id="6c2eb056-03a2-41fe-a935-6acba47cac41" class="column-list"><div id="d1284afa-8108-4437-9eba-716738fbc892" style="width:18.75%" class="column"><p id="e0e44e4a-cc2c-4ec0-8591-3443ceb66233" class=""><code><strong>npm outdate</strong></code></p></div><div id="489d4cff-7ff2-4942-9b7c-f4ae6dcb8cb3" style="width:81.25%" class="column"><p id="5d682a2d-19dd-4753-bc48-fd03b59a4282" class=""><code><strong>npm outdate --dd</strong></code></p></div></div><ul id="eec06dd3-864f-4130-8a15-c46d9945167b" class="bulleted-list"><li style="list-style-type:disc">Actualizar los paquetes que no están en la ultima versión</li></ul><div id="a5e8af79-657d-4126-9be6-f64c9ab72ac0" class="column-list"><div id="bec9801b-b59d-4bc3-8df1-891ce512fd94" style="width:18.75%" class="column"><p id="59b956b2-656d-42f9-9dfd-c264eb393fd5" class=""><code><strong>npm update</strong></code></p></div><div id="a24667e6-cfd1-4f83-a912-9385ecc39c92" style="width:81.25%" class="column"><p id="9eef5f21-2c4e-4b11-abbc-0fbcd90c1942" class=""><code><strong>npm update &lt;paquete&gt;</strong></code></p></div></div><ul id="a434c468-928b-470a-975f-ccfa1ee512ec" class="bulleted-list"><li style="list-style-type:disc">Eliminando el paquete del <mark class="highlight-blue"><strong><code>package.json</code></strong></mark> y del directorio <mark class="highlight-teal"><strong><code>node_modules</code></strong></mark>:</li></ul><p id="b20cd46e-a2c4-4709-9240-fa12b51bb855" class=""><code><strong>npm uninstall &lt;paquete&gt;</strong></code></p><ul id="64264c40-564c-44c4-8c59-d54bd0f8eb00" class="bulleted-list"><li style="list-style-type:disc">Eliminando solamente del directorio <mark class="highlight-teal"><strong><code>node_modules</code></strong></mark>:</li></ul><p id="b7e959a2-6b36-4ec2-bb3e-f87302107fca" class=""><code><strong>npm uninstall --no-save &lt;paquete&gt;</strong></code></p><p id="23e85f11-b027-40e5-99cd-daebce1509d6" class="">
+</p><h3 id="d24b925b-bcc5-43f2-bfe7-4274887e4b82" class="block-color-purple_background"> <strong>Versionado de paquetes</strong></h3><p id="b0dde464-c63a-43a8-ad73-99d1a5ef6fb1" class="">El versionado de paquetes está conformado por tres valores:</p><ul id="80eab0a8-d5e0-4e0a-87f7-dbbe04ead88d" class="bulleted-list"><li style="list-style-type:disc"><strong>Major:</strong> el valor que muestra la versión que contiene los cambios importantes del paquete</li></ul><ul id="65709b69-8c25-4674-a247-ac7142ec3a83" class="bulleted-list"><li style="list-style-type:disc"><strong>Minor:</strong> el valor que muestra la versión que contiene los cambios en funcionalidades, pero no representan un cambio significativo</li></ul><ul id="bc345d06-2c96-462d-b4b8-9b947a6bfedb" class="bulleted-list"><li style="list-style-type:disc"><strong>Patch:</strong> el valor que muestra la versión que contiene cambios rápidos para solucionar problemas de seguridad o <em>bugs</em><figure id="92cd9659-90d6-4a1a-b676-633b50b4be91" class="image"><a href="npm%2092cd965990d64a1ab676633b50b4be91/wheelbarrel-no-tilde-caret-white-bg-w1000-72ca1a72-4c7f-4abe-8482-425c01a72f89.webp"><img style="width:576px" src="npm%2092cd965990d64a1ab676633b50b4be91/wheelbarrel-no-tilde-caret-white-bg-w1000-72ca1a72-4c7f-4abe-8482-425c01a72f89.webp"/></a></figure><ul id="85875de4-cab4-40a4-a11d-fe46839dfe35" class="toggle"><li><details open=""><summary><strong>Símbolos ^ y ~ para actualizar las versiones minor y patch</strong></summary></details></li></ul><p id="1ecc37e4-9904-41a6-8054-d4f2346b42e3" class="">Existen dos símbolos que acompañan a este versionado, que sirven para actualizar las versiones <em>minor</em> y <em>patch</em> del paquete:</p><ul id="d3c9b755-2a9a-4de6-8455-f7240e01298b" class="bulleted-list"><li style="list-style-type:circle"><strong>Caret (^):</strong> Permite actualizar las versiones <em>minor</em> y <em>patch</em></li></ul><ul id="f5b48c15-47db-4bc1-bb57-cae233be17ec" class="bulleted-list"><li style="list-style-type:circle"><strong>Tilde (~):</strong> Permite actualizar las versiones <em>patch</em></li></ul><p id="a7917904-10c8-42f9-a3dd-4bbd28a06f54" class="">
+</p></li></ul><h3 id="f4e9ecb9-706c-4d37-b007-8b7ab1f9af8a" class="block-color-purple_background"> <strong><strong>Ejecutar tareas</strong></strong></h3><p id="3c9e3787-e277-49cf-9705-ad411e021ccc" class="">El apartado de <mark class="highlight-teal"><strong><code>&quot;scripts&quot;</code></strong></mark>en el <mark class="highlight-blue"><strong><code>package.json</code></strong></mark>es el que indica los comandos “tareas” a ejecutar del proyecto.</p><p id="79475ac9-6b20-41a4-8b99-5defe0dd61b2" class="">Por defecto no realiza ninguna tarea, simplemente es una llamada a <mark class="highlight-teal"><code><strong>echo</strong></code></mark>
+mostrando que no existen tests:</p><pre id="9416dfd5-df83-4474-b2f4-9245a047a0cc" class="code"><code>$ cat package.json | jq .scripts
+{
+  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+}</code></pre><p id="c891f4cc-ad58-4fce-b765-b5fc2d13af5f" class="">Lo interesante es crear nuevos scripts con tareas que relizamos frecuentemente. </p><p id="dc93775e-7e7f-474a-9566-5eae9c6f0191" class="">Los <strong>nombres de tareas más comunes </strong>que se suelen utilizar:</p><table id="c264bc22-c037-4b12-9ed5-e7b6746bad10" class="simple-table"><thead class="simple-table-header"><tr id="f021fe3b-6488-4ab6-a2af-4fccc1d98fea"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><strong>Tarea</strong></th><th id="\\=Y" class="block-color-default simple-table-header" style="width:538.65625px"><strong>Descripción</strong></th><th id="_x[J" class="simple-table-header-color simple-table-header" style="width:137.65625px"><strong>Comando</strong></th></tr></thead><tbody><tr id="ae636c20-d8ef-4071-b18c-49c9840ca8e2"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>start</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Se suele usar para tareas de inicio del proyecto. Se puede arrancar con npm start.</td><td id="_x[J" class="" style="width:137.65625px"><code><strong>npm run start</strong></code></td></tr><tr id="9d813610-e937-4737-941a-41b6e2eb618c"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>dev</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Alternativa al anterior, se suele usar para levantar servidores de desarrollo locales.</td><td id="_x[J" class="" style="width:137.65625px"><code><strong>npm run dev</strong></code></td></tr><tr id="9b64a7ff-a563-4fba-bee0-1dc581a65a89"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>serve</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Idem al anterior.</td><td id="_x[J" class="" style="width:137.65625px"><code><strong>npm run serve</strong></code></td></tr><tr id="c17f90e5-3034-4d30-a1c8-af80e1effb21"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>build</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Tarea que construye los ficheros finales para subir a la web de producción.</td><td id="_x[J" class="" style="width:137.65625px"><strong><code>npm run build</code></strong></td></tr><tr id="f6895f53-9744-46a2-b0ed-d1028ddb3a28"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>test</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Suele iniciar una batería de tests. Se puede arrancar con npm test o npm t.</td><td id="_x[J" class="" style="width:137.65625px"><code><strong>npm run test</strong></code></td></tr><tr id="000c3aa3-a7f6-40d8-a6b3-93ff296ac3b1"><th id="jVni" class="simple-table-header-color simple-table-header" style="width:86.65625px"><mark class="highlight-blue"><strong>deploy</strong></mark></th><td id="\\=Y" class="block-color-default" style="width:538.65625px">Suele desplegar en la web de producción la webapp construída con build.</td><td id="_x[J" class="" style="width:137.65625px"><code><strong>npm run deploy</strong></code></td></tr></tbody></table><p id="fd9b7ca8-652c-4568-a8a1-a5b1d0d6a7b2" class="">Una vez hayas escrito el comando en el archivo <mark class="highlight-blue"><strong><code>package.json</code></strong></mark>, la manera de ejecutarlo será con el comando <strong><code>npm run &lt;comando&gt;</code></strong></p><p id="dff3ad8f-b4ee-4b07-bd1a-3b095aa0e9d3" class="">
+</p><h3 id="519a9861-aaa0-4ae2-9c8c-dc59246740e8" class="block-color-purple_background"> <strong><strong>Solución de problemas en proyectos con NPM</strong></strong></h3><p id="2d00b461-211b-406c-a9b2-7e08b76f36ca" class="">Cuando estés desarrollando un proyecto con NPM, puede que generes errores que no permitan seguir con tu trabajo. <strong>Saber manejar los errores es fundamental para solucionarlos y seguir con tus tareas</strong></p><ul id="34871f3b-1a8a-4c5d-8aa9-94228c55906f" class="toggle"><li><details open=""><summary><strong>Mostrar todos los pasos de un comando de NPM</strong></summary></details></li></ul><div id="2485608b-8871-4184-b1f0-056230438f34" class="column-list"><div id="c2557738-609a-47e1-8def-d4e98e116a98" style="width:25%" class="column"><p id="a364190f-e6eb-4d67-a8fc-09a6f0f7885f" class=""><code><strong>npm [comando] --dd</strong></code></p></div><div id="27b60831-3e0f-4a95-81cb-9c1590419d7a" style="width:75%" class="column"><p id="1032ea59-3894-42ff-a0be-b553e1432982" class="">Para identificar el error que puede existir en tu proyecto, es necesario analizar cada paso que ejecuta un comando, para saber qué o en dónde ocurre el problema.</p></div></div><ul id="3a377cac-7751-49ee-b9ba-0ddc5b969e78" class="toggle"><li><details open=""><summary><strong>Error de dependencias en </strong><mark class="highlight-teal"><code><em><strong>node_modules</strong></em></code></mark></summary></details></li></ul><div id="3defa2e0-6ead-4520-a4fb-92fe5378dfb4" class="column-list"><div id="8a343ef6-72dd-4f27-a290-e478f0873a34" style="width:25%" class="column"><p id="f1e13a6c-7345-4f23-b81d-ebde88b85bf5" class=""><code><strong>npm cache clean --force</strong></code>
+<code><strong>npm cache verify</strong></code></p></div><div id="4a1ab645-ec4a-419a-bb74-a14e72a703bc" style="width:75%" class="column"><p id="195bcb96-3582-40e6-af42-814a6810aac5" class="">Existen situaciones en las que instalas una dependencia con una versión que no corresponde a la deseada. En esta situación, puedes utilizar los siguientes comandos, el primero para borrar el caché de NPM y el segundo para verificar si están eliminados correctamente.</p></div></div><ul id="ed9464d4-7783-4ee7-84a3-1f9c229e629b" class="bulleted-list"><li style="list-style-type:disc">Eliminar la carpeta<code> </code><code><mark class="highlight-teal"><strong>node_mudule </strong></mark></code></li></ul><div id="ade402bb-19bb-48da-ba5a-597041aa9b18" class="column-list"><div id="1e9b9650-0149-433e-be47-9c823b04d934" style="width:31.25%" class="column"><p id="14c1f6f1-d680-4024-8937-572d29638da2" class=""><code><strong>rm -rf node_modules</strong></code></p></div><div id="8273b18e-8b12-45d1-a5bf-fefa748686be" style="width:68.75%" class="column"><p id="b78602ba-a9af-432d-86be-f21b032db370" class="">Nota: este comando puede eliminar cualquier otra carpeta</p></div></div><ul id="56bdb447-52d7-4dfc-82b2-dfa5999c2bfb" class="bulleted-list"><li style="list-style-type:disc">Otra alternativa para eliminar de forma segura una carpeta es instalando el siguiente paquete:</li></ul><div id="f4f5a252-4b4e-4b27-92d0-fbc21f4b2198" class="column-list"><div id="7ba31fd0-e650-43a3-9e98-60307c1c459b" style="width:37.5%" class="column"><p id="10936b26-8239-4647-a290-ab22d3f5ebec" class=""><code><strong>sudo npm install -g rimraf</strong></code></p><p id="65c51ce7-00a5-47c9-940e-d88ca0f77826" class=""><code><strong>rimraf node_modules</strong></code></p></div><div id="acd74bc9-e9f3-4fc8-ade7-51fe384d8d24" style="width:62.5%" class="column"><p id="10db9313-7a44-4e68-ade1-1a72af60e6f1" class="">Ahora podemos ejecutar el siguiente comando para eliminar <mark class="highlight-teal"><code><strong>node_module</strong></code></mark></p><p id="5f09da3b-008b-4a5e-b0d3-67d447d1dacb" class="">
+</p></div></div><h3 id="e42e207e-95e6-48ad-a759-0fa6437e8717" class="block-color-purple_background"> <strong><strong>Gestionar la seguridad en proyectos con NPM</strong></strong></h3><p id="c4efb54d-3b74-4f61-9cc3-904dedd879a0" class="">La seguridad de tu proyecto puede ser vulnerada por paquetes desactualizados<em>.</em> Al momento de instalar tus paquetes con el comando <code>npm install</code>puede mostrar advertencias <em>(NPM WARN) </em>de las dependencias desactualizadas.</p><figure id="4016592b-12eb-4320-be73-0d082ceee8ad" class="image"><a href="npm%2092cd965990d64a1ab676633b50b4be91/Captura_de_pantalla_2022-07-03_12-24-47_(1).png"><img style="width:801px" src="npm%2092cd965990d64a1ab676633b50b4be91/Captura_de_pantalla_2022-07-03_12-24-47_(1).png"/></a></figure><ul id="0cbb010f-5d65-49a3-97e4-ab2fadfe6669" class="toggle"><li><details open=""><summary><strong>Auditar tus dependecias</strong></summary></details></li></ul><div id="e1e2022c-ecba-425a-81d4-62064be4fcc8" class="column-list"><div id="eac05dfa-3991-45d6-b6c0-5e1ff54844a6" style="width:25%" class="column"><p id="9877ea14-921e-49b3-86eb-f4cb1462d008" class=""><strong><code>npm audit</code></strong><strong> </strong></p></div><div id="b009f205-f3d6-48e3-b7c6-4e3aeaa5f82b" style="width:75%" class="column"><p id="8a12c5ec-3ef7-4198-b1e2-00f48e5ea115" class="">muestra una descripción de las dependencias instaladas, si se encuentran vulnerabilidades, se calculará el impacto al proyecto.</p></div></div><div id="3fb65741-cbd7-41cc-8606-6d9770713224" class="column-list"><div id="bf5ad497-cd1b-4832-8825-b2a06829cad6" style="width:25%" class="column"><p id="93def610-17d9-4e7c-b335-12ce95c139ee" class=""><strong><code>npm audit fix</code></strong> </p></div><div id="bddc0596-c887-485c-8b3c-5d3cd5f4de48" style="width:75%" class="column"><p id="704cfcb5-4fba-40f9-afb7-d0e1ec0a59ea" class="">proporciona una actualización de los paquetes, similar al comando <code>npm update &lt;paquete&gt;</code>.</p></div></div><div id="11420394-565a-42ea-93a6-7791dfb23973" class="column-list"><div id="e3caa1c9-b2fd-44ad-8622-5fa2b951e341" style="width:25%" class="column"><p id="b7e60ca3-d8ac-4706-9b0c-cb9bf63e9d7f" class=""><strong><code>npm audit --json</code></strong></p></div><div id="11b3a18e-3756-440f-9b77-08434e89c94e" style="width:75%" class="column"><p id="3d955ca9-e013-4939-b03a-9257034dbc78" class="">Si se requiere un informe más detallado en formato JSON, utiliza el comando </p></div></div><h3 id="124b1e71-03d8-4755-b6a4-c0a7d55dec9f" class="block-color-purple_background"> <strong><strong>Crear un paquete para NPM</strong></strong></h3><p id="b79aa535-03b2-4189-bf56-efebf7404b63" class="">Al crear un paquete para NPM, podrás compartir tu trabajo a varios desarrolladores y utilizar tu código mediante <code>npm install</code></p><p id="749eda63-890a-46b5-a55c-e0cdcd9e601c" class="">Te mostraré un ejemplo, un proyecto de mensajes aleatorios que estará instalado globalmente y se ejecutará mediante la terminal.</p><p id="348c64eb-aea1-4347-942f-1f9b18f30ff7" class=""><code><strong>pwd</strong></code></p><p id="a18b2042-386c-47a4-8bb2-2adc6a5016a8" class=""><code><strong>mkdir random-messages</strong></code></p><p id="5f9ab40c-7d57-42b8-8f57-ab2a491c9003" class=""><code><strong>cd random-messages/</strong></code></p><p id="0d0a74c0-d26b-469a-b6ce-b544c6d82aba" class=""><code><strong>git init</strong></code></p><p id="1d0301fb-3cb9-47d0-a48f-aac1a0cd8851" class=""><code><strong>npm init</strong></code></p><ul id="b053d484-98da-4817-a4e7-11a01319bddb" class="bulleted-list"><li style="list-style-type:disc">Se crea el archivo <mark class="highlight-yellow"><code><strong>index.js </strong></code></mark>en la carpeta src</li></ul><pre id="d4e9ba25-0779-4e8b-894e-77d2ce2a7a92" class="code"><code>// Se declara el arreglo
+const messages = [ &quot;David&quot;, &quot;Diana&quot;, &quot;Ana Maria&quot;, &quot;Isabela&quot;, &quot;Antonio&quot;, &quot;Norma&quot; ]
+
+//Crear función para enviar aleatoriamente  los nombres del arreglo
+const randomMsg = () =&gt; {
+    const message = messages[Math.floor(Math.random()*messages.length)]
+    console.log(message)
+}
+
+// Exportar como un módulo
+module.exports = { randomMsg }</code></pre><ul id="ca4e062e-36e2-499e-8eb2-0b9a2469bde0" class="bulleted-list"><li style="list-style-type:disc">Se debe crear una carpeta bin donde se crea ele archivo <mark class="highlight-yellow"><code><strong>global.js </strong></code></mark>(Configuración que se necesita)</li></ul><pre id="e86c8362-1262-402b-bd59-89a51e330786" class="code"><code>#!/usr/bin/env node  // se va ejecutar dentro del sistema bash
+
+//Variable que llama la funcion que exportamos
+let random = require(&#x27;../src/index.js&#x27;)
+
+//Ejecuto la funcion
+random.randomMsg()</code></pre><ul id="9f735d07-df07-48d5-ae87-4de55a3e418e" class="bulleted-list"><li style="list-style-type:disc">Modifico el <mark class="highlight-blue"><code><strong>package.json</strong></code></mark> y coloco la configuración de bin que necesito</li></ul><div id="fa98ed87-5842-49c7-9d99-fb153f593c83" class="column-list"><div id="8bf7047b-3179-45f5-9a66-6e101d9ece0b" style="width:75%" class="column"><pre id="04bf8736-4e8f-4451-b923-a6d31243dc7e" class="code"><code>&quot;bin&quot;: {
+    &quot;random-msg&quot;: &quot;./bin/global.js&quot;
+  },
+  &quot;preferGlobal&quot;: true</code></pre></div><div id="a3f22e6c-be98-44bc-a0d9-ce5c8b80209f" style="width:25.000000000000007%" class="column"><figure id="25925cb3-3dd6-4e8e-b439-47d4f1128716" class="image"><a href="npm%2092cd965990d64a1ab676633b50b4be91/2021-02-26_13h37_38-ec2d49a5-4a2d-45ed-85e0-3b3e1c57ab91.webp"><img style="width:168px" src="npm%2092cd965990d64a1ab676633b50b4be91/2021-02-26_13h37_38-ec2d49a5-4a2d-45ed-85e0-3b3e1c57ab91.webp"/></a></figure></div></div><figure id="8bf05128-b945-4c4a-a247-dd27e29d7b1a"><a href="https://github.com/platzi/npm-random-msg/tree/01-create-package" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">GitHub - platzi/npm-random-msg at 01-create-package</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/platzi/npm-random-msg/tree/01-create-package</div></div><img src="https://opengraph.githubassets.com/18c1aa8c928b1f3ee17e88c65d93c37cbd59cfb4999c50da11de5d182b63ad58/platzi/npm-random-msg" class="bookmark-image"/></a></figure><p id="18f95a1f-634e-4d88-9dee-565d92bcc06d" class="">
+</p><h3 id="bac19439-3e66-4f21-8005-07942cea95c5" class="block-color-purple_background"> <strong><strong>Publicar un paquete en NPM</strong></strong></h3><p id="d6c3bdab-4408-4d7b-8e84-6334822cddc5" class="">Antes de publicar el proyecto de mensajes aleatorios, debemos asegurarnos de que el programa se ejecute bien en la terminal. Para esto, identifica el directorio en el que te encuentras, debe ser el mismo del proyecto con el comando <code>pwd</code></p><div id="a7251dfe-d930-408b-8c91-c8c55675800e" class="column-list"><div id="53ed33d5-0b4e-4964-9a7a-c41aa19d160e" style="width:18.75%" class="column"><p id="f8dddeff-d294-4eed-a16a-bb6f2ca43bce" class=""><code><strong>sudo npm link</strong></code><strong> </strong></p></div><div id="cc3b332d-30bd-46a7-a845-3c77a2d63445" style="width:81.25%" class="column"><p id="06d03408-d254-4566-ab95-7a56b01b27f7" class="">Permitirá hacer una referencia al paquete hacia el directorio global de NPM, similar a cómo se instalaría desde los servidores de NPM.</p></div></div><p id="ac1616ab-c8a3-4f6b-979f-e2ebedbbe275" class="">Otra forma es instalarlo o actualizarlo de manera global, como cualquier otra dependencia, pero en lugar del nombre de la dependencia, estará la ruta del proyecto:</p><p id="a32338b9-cb0b-48cb-80f1-3f5be06eb0c2" class=""><code><strong>sudo npm install -g /users/tuUsuario/random-messages</strong></code></p><p id="ef133fb5-b37f-4865-8f46-cdc1802182ef" class="">
+</p><ul id="eec45744-efc4-4f5c-8d5b-9f5624464d43" class="toggle"><li><details open=""><summary>De esta manera, ya puedes ejecutar el programa con el comando que creamos en <mark class="highlight-blue"><code>&quot;bin&quot;</code></mark>
+, <code>random-msg</code>y funcionará de forma global en el sistema.</summary></details></li></ul><div id="ee9521f4-7bf1-4ffc-87e8-2dfcd74f70f0" class="column-list"><div id="bf103155-7f1f-4876-8cb3-ce1c8e41fb78" style="width:18.75%" class="column"><p id="47acb9c6-1dc1-4f14-b530-07dc41695f9f" class=""><code><strong>npm adduser</strong></code></p></div><div id="d3ae5b81-43a3-41b5-ac99-280b8b94d6cc" style="width:81.25%" class="column"><p id="66782fdf-17cc-477f-b7c3-57fd43aea602" class="">Ingresa tu usuario que has registrado: <a href="https://www.npmjs.com/">https://www.npmjs.com/</a></p></div></div><div id="1ca25ad0-d6ef-41bf-b032-87c007e114e6" class="column-list"><div id="cb65bde0-14bf-481d-a693-85ab8b2f493c" style="width:18.75%" class="column"><p id="b3916df0-5615-4069-909a-8ff56088cbf9" class=""><code><strong>npm publish</strong></code></p></div><div id="22c0a180-2bc3-48b3-a368-d4d1f299ff36" style="width:81.25%" class="column"><p id="54eee9e2-2a47-4216-8423-5b3180c7f6c5" class="">Publica tu paquete </p></div></div><ul id="ad69ed55-a198-443c-8ef3-3aa1a3f9ee41" class="toggle"><li><details open=""><summary><strong>Crear un archivo </strong><a href="http://readme.md/"><em><strong>README.md</strong></em></a><strong> para tu paquete</strong></summary></details></li></ul><p id="32028023-025f-4e55-952a-e78f67ad8aac" class="">Puedes utilizar esta <a href="https://gist.github.com/gndx/1b2c8482049c6d3b521dffcf33337558">estructura base</a> y adecuarla a tu proyecto. Puedes mirar el código haciendo clic en el botón “Raw”.</p><p id="2955973f-b781-497b-87de-c45214d482ae" class="">
+</p><ul id="5b64912e-5b65-4c5a-8037-edbc61f162bb" class="toggle"><li><details open=""><summary><strong>Eliminar paquetes publicados</strong></summary></details></li></ul><ul id="d4b92ce8-a472-465d-b11d-31ab10aad76d" class="bulleted-list"><li style="list-style-type:disc">Si quieres eliminar el paquete o versión publicada para los paquetes recién creados, siempre que ningún otro paquete en el Registro público de npm dependa de su paquete, puede anular la publicación en cualquier momento dentro de las primeras 72 horas después de la publicación</li></ul><p id="2296b58d-dec4-44e4-853f-2fce96424354" class=""><code><strong>npm unpublish &lt;package_name&gt; --force</strong></code></p><p id="45fafc7e-ace7-4f5d-9de9-b3f2009329b1" class=""><code><strong>npm unpublish &lt;package_name&gt;@&lt;version&gt;</strong></code></p><ul id="8cc1cceb-a6b0-4660-9195-958b4297d310" class="bulleted-list"><li style="list-style-type:disc">Para paquetes que tienen publicados más de 72 horas, independientemente de cuánto tiempo hace que se publicó un paquete, más detalles aquí: <a href="https://www.npmjs.com/policies/unpublish">npm Unpublish Policy</a></li></ul><p id="11470561-600b-4af5-982e-34abe8211d5f" class="">
+</p><ul id="3f7a5925-c575-4980-9ad7-150d69bbed2f" class="toggle"><li><details open=""><summary><strong>Si les sale el error 402</strong></summary></details></li></ul><div id="55f7e3c1-dbab-4523-bbc8-afed775367a4" class="column-list"><div id="b91d451f-74d1-4418-bb69-d1f8a564d2e8" style="width:37.5%" class="column"><p id="9b2cf983-950f-449b-887a-0292ff5c068b" class=""><code><strong>npm publish --access=public</strong></code><strong> </strong></p></div><div id="de5678a3-5fa3-465b-a39f-423a6b56d56f" style="width:62.5%" class="column"><p id="92d68eb9-2511-4c94-bd69-bf8578fa459a" class="">Es que ahora npm publish deja por defecto el paquete privado (servicio de paga) así que hay que agregar el flag --access=public</p></div></div><ul id="c3bffdd8-6108-4b3e-ab6d-da999d4de589" class="toggle"><li><details open=""><summary><strong>Actualizar un paquete publicado</strong></summary></details></li></ul><p id="937363f4-aa6e-4b86-a0d0-f12f2ff6a201" class="">Deben primero dejar limpio el working directory de git, es decir deben hacer un commit de los cambios que se realizaron o revertir cambios.</p><p id="aa7c8378-0a35-4da2-bceb-f4a3b2b9e9ba" class="">Este error puede ocurrir cuando se añade en el package.json el repositorio de git, como se modifica el archivo es necesario hacerle commit antes de enviar el version patch</p><p id="5cf30148-3f0d-408b-877a-7a89d3182019" class=""><code><strong>npm version patch</strong></code>   o  <code><strong>/minor/major</strong></code></p><p id="1aa560e3-2979-4513-8579-63f9e5ecb75b" class=""><code><strong>npm publish</strong></code></p><p id="91e3473e-1d1b-4768-9a63-cf678d7a4691" class="">
+</p><p id="5bf353fb-ad40-4fc8-8ec8-6f30748ef4e2" class="">Fuente Documentación: </p><figure id="1c7f1508-33f6-41c3-9335-a1b9b0e363e7"><a href="https://platzi.com/cursos/npm/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Curso de Gestión de Dependencias y Paquetes con NPM</div><div class="bookmark-description">NPM es el gestor de paquetes y dependencias más usado para desarrollar con JavaScript. Administra módulos, distribuye paquetes y agrega dependencias a tus proyectos. Instala y gestiona librerías Javascript. Crea tus propias librerías y domina uno de las herramientas más importantes en el desarrollo con JavaScript.</div></div><div class="bookmark-href"><img src="https://static.platzi.com/media/favicons/platzi_favicon.png" class="icon bookmark-icon"/>https://platzi.com/cursos/npm/</div></div><img src="https://static.platzi.com/media/courses/Opengraph-gestion-dependencias-paquetes-NPM.png" class="bookmark-image"/></a></figure></div></article></body></html>
