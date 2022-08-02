@@ -5,57 +5,88 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MOKEPON!</title>
-   
-    <style>
-      .visible{
-        display: none;
-      }
-    </style>
+
+    <link rel="stylesheet" href="./css/stylesheet.css" />
   </head>
   <body>
-    <h1>MOKEPON!</h1>
-
     <section id="seleccionar-mascotas">
-      <h2>Elige tu mascota:</h2>
+      <h1 class="title">Neverwinter</h1>
 
-      <label for="hipodoge">Hipodoge</label>
-      <input type="radio" name="mascota" id="hipodoge"/>
-      
-      <label for="capipepo">Capipope</label>
-      <input type="radio" name="mascota" id="capipepo"/>
-      
-      <label for="ratigueya">Ratigueya</label>
-      <input type="radio" name="mascota" id="ratigueya"/>
+      <h2 class="subtitulo">Elige tu personaje:</h2>
 
-      <button id="button-mascotas">Seleccionar</button>
+      <div class="tarjetas">
+        <label class="tarjeta-mokepon" for="hipodoge">
+          <img src="./assets/Gul'dan.png" alt="" />
+          <p>Gul'dan</p>
+        </label>
+        <input type="radio" name="mascota" id="hipodoge" />
+
+        <label class="tarjeta-mokepon" for="capipepo">
+          <img src="./assets/Tyrande.png" alt="" />
+          <p>Tyrande</p>
+        </label>
+        <input type="radio" name="mascota" id="capipepo" />
+
+        <label class="tarjeta-mokepon" for="ratigueya">
+          <img src="./assets/Grommash.png" alt="" />
+          <p>Grommash</p>
+        </label>
+        <input type="radio" name="mascota" id="ratigueya" />
+      </div>
+
+      <button id="button-mascotas">Habilidades</button>
     </section>
 
     <section id="seleccionar-ataque">
-        <h2>Elige tu ataque:</h2>
+      <h1 class="title">Neverwinter</h1>
+
+      <h2>Elige tu ataque:</h2>
+      <div class="button-abilidades">
+        <div>
+          <p>Fuego</p>
+          <button id="button-fuego">
+            <img src="./assets/fuego.png" alt="">
+          </button>
+        </div>
+        <div>
+          <p>Agua</p>
+          <button id="button-agua">
+            <img src="./assets/agua.png" alt="">
+          </button>
+        </div>
+        
+        <div>
+          <p>Tierra</p>
+          <button id="button-tierra">
+            <img src="./assets/tierra.png" alt="">
+          </button>
+        </div>
+     
+      </div>
+
+      <div>
+        <section id="mensaje">
+          <!-- DESDE JS -->
+        </section>
+
+        <section id="reiniciar">
+          <button>Reiniciar</button>
+        </section>
+      </div>
+      
+
+      <div>
         <p>
-          <button id="button-fuego">Fuego</button>
-          <button id="button-agua">Agua</button>
-          <button id="button-tierra">Tierra</button>
+          Tu mascota <span id="nombre-mascota">nombre</span> tiene
+          <span id="vidad-anfitrion">3</span> vidas
         </p>
-
-        <p>Tu mascota <span id="nombre-mascota">nombre</span> tiene <span id="vidad-anfitrion">3</span> vidas</p>
-      <p>Las mascotas <span id="nombre-mascota-enemigo">nombre</span> del enemigo tiene <span id="vidad-maquina">3</span> vidas</p>
-    </section>
-
-    <section id="mensaje">
-      <p>
-        <!-- DESDE JS -->
-      </p>
-      <h2>
-        <!-- DESDE JS -->
-      </h2>
-    </section>
-
-    <section id="reiniciar">
-      <button>Reiniciar</button>
+        <p>
+          Las mascotas <span id="nombre-mascota-enemigo">nombre</span> del
+          enemigo tiene <span id="vidad-maquina">3</span> vidas
+        </p>
+      </div>
     </section>
 
     <script src="./js/mokepon.js"></script>
   </body>
-  
 </html>

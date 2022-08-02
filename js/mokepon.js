@@ -43,7 +43,7 @@ selecMascAnfitrion = () => {
   if (condicional == false) {
     alert("Debe seleccionar una mascota");
   } else {
-    sectionAtaque.style.display = 'block'
+    sectionAtaque.style.display = 'flex'
     sectionMascotas.style.display = 'none'
     SelecMascMaquina();
   }
