@@ -1,93 +1,121 @@
-let nombresMascotas = ["Hipodoge", "Capipepo", "Ratigueya"];
-let habilidades = ["FUEGO", "TIERRA", "AGUA"];
+const nombresMascotas = ["Gul'dan", "Tyrande", "Grommash"];
+const habilidades = ["FUEGO", "TIERRA", "AGUA"];
 let habilidadMaquina, habilidadAnfitrion;
+
 let vidaMaquina = 3, vidaAnfitrion = 3;
 
-let sectionAtaque =  document.getElementById("seleccionar-ataque");
-let buttonReiniciar = document.getElementById("reiniciar");
-let sectionMascotas = document.getElementById('seleccionar-mascotas')
+
+const nombreAtaqueAnfitrion = document.getElementById("nombre-ataque-anfitrion");
+const nombreAtaqueMaquina = document.getElementById("nombre-ataque-maquina");
+
+const sectionAtaque = document.getElementById("seleccionar-ataque");
+const sectionMascotas = document.getElementById("seleccionar-mascotas");
+const contenedorResultado = document.querySelector(".info-resultado");
+
+const buttonReiniciar = document.getElementById("reiniciar");
+
+const personajeAnfitrion = document.getElementById("personaje-anfitrion");
+const personajeMaquina = document.getElementById("personaje-maquina");
+
+const ataqueAnfitrion = document.getElementById("img-ataque-anfitrion");
+const ataqueMaquina = document.getElementById("img-ataque-maquina");
+
+let empates = 0,
+  victorias = 0,
+  derotas = 0;
+
+const resultados = document.querySelectorAll(".info-resultado span");
+
+const nombreMascota = document.getElementById("nombre-mascota-enemigo");
+
+const personajeSeleccionado = document.getElementById("nombre-personaje");
+const inputMascotas = document.querySelectorAll("#seleccionar-mascotas input");
+
+const fuego = document.getElementById("button-fuego");
+const agua = document.getElementById("button-agua");
+const tierra = document.getElementById("button-tierra");
+
+const sectionMensaje = document.getElementById("mensaje");
+const resultado = document.getElementById("resultado");
 
 aleatorio = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 iniciarJuego = () => {
-  sectionAtaque.style.display = 'none'
-  buttonReiniciar.style.display = 'none'
-  let buttonMascotas = document.getElementById("button-mascotas");
-  buttonMascotas.addEventListener("click", selecMascAnfitrion);
+  sectionAtaque.style.display = "none";
+  buttonReiniciar.style.display = "none";
   selecHabilidad();
   buttonReiniciar.addEventListener("click", reiniciarJuego);
-  
 };
 
-SelecMascMaquina = () => {
-  let nombreMascota = document.getElementById("nombre-mascota-enemigo");
-  nombreMascota.innerHTML = nombresMascotas[aleatorio(1, 3) - 1];
-};
-
-selecMascAnfitrion = () => {
-  // querySelectorAll genera un arreglo con todos los elementos similares
-  let mascotaSeleccionada = document.getElementById("nombre-mascota");
-  let inputMascotas = document.querySelectorAll("#seleccionar-mascotas input");
-  let condicional = false;
-
-  //forEach es el metodo de recorrer un arreglo.
-  inputMascotas.forEach(function (valor, indice, inputMascotas) {
-    if (valor.checked == true) {
-      condicional = true;
-      alert(`Usted ha seleccionado ${nombresMascotas[indice]}`);
-      mascotaSeleccionada.innerText = nombresMascotas[indice];
-    }
-  });
-  if (condicional == false) {
-    alert("Debe seleccionar una mascota");
-  } else {
-    sectionAtaque.style.display = 'flex'
-    sectionMascotas.style.display = 'none'
+document.addEventListener("click", (e) => {
+  if (e.target.matches(".tarjeta-mokepon img") ) {
+    personajeSeleccionado.innerText = e.target.dataset.nombre;
+    mostrarRutaImagen(e.target.dataset.nombre, personajeAnfitrion);
+    sectionAtaque.style.display = "flex";
+    sectionMascotas.style.display = "none";
     SelecMascMaquina();
   }
+});
+
+SelecMascMaquina = () => {
+  let num = aleatorio(1, 3) - 1;
+  nombreMascota.innerHTML = nombresMascotas[num];
+  mostrarRutaImagen(nombresMascotas[num], personajeMaquina);
 };
 
-selecHabilidad = (boolean) => {
-  let fuego = document.getElementById("button-fuego");
-  let agua = document.getElementById("button-agua");
-  let tierra = document.getElementById("button-tierra");
-  
+//   //forEach es el metodo de recorrer un arreglo.
+//   inputMascotas.forEach(function (valor, indice, inputMascotas) {
+//     if (valor.checked == true) {
 
+
+selecHabilidad = (boolean) => {
   fuego.addEventListener("click", () => {
     habilidadAnfitrion = "FUEGO";
+    mostrarRutaImagen("FUEGO", ataqueAnfitrion);
+    nombreAtaqueAnfitrion.innerText = "FUEGO";
     selecHabilidadMaquina();
   });
   agua.addEventListener("click", () => {
     habilidadAnfitrion = "AGUA";
+    mostrarRutaImagen("AGUA", ataqueAnfitrion);
+    nombreAtaqueAnfitrion.innerText = "AGUA";
     selecHabilidadMaquina();
   });
   tierra.addEventListener("click", () => {
     habilidadAnfitrion = "TIERRA";
+    mostrarRutaImagen("TIERRA", ataqueAnfitrion);
+    nombreAtaqueAnfitrion.innerText = "TIERRA";
     selecHabilidadMaquina();
   });
-  
-    if (boolean == false) {
-      fuego.disabled = false; agua.disabled = false; tierra.disabled  = false;
-     } else if (boolean == true) {
-      fuego.disabled = true;  agua.disabled = true; tierra.disabled  = true;
-     }
-
-}
+//disable desactiva o activa la funcionalizada de un elemento
+  if (boolean == false) {
+    fuego.disabled = false;
+    agua.disabled = false;
+    tierra.disabled = false;
+  } else if (boolean == true) {
+    fuego.disabled = true;
+    agua.disabled = true;
+    tierra.disabled = true;
+  }
+};
 
 selecHabilidadMaquina = () => {
-  habilidadMaquina = habilidades[aleatorio(1, 3) - 1];
+  let num = aleatorio(1, 3) - 1;
+  habilidadMaquina = habilidades[num];
+  mostrarRutaImagen(habilidades[num], ataqueMaquina);
+  nombreAtaqueMaquina.innerText = habilidades[num];
   resultadoEnfrenramiento();
   resultadoFinal();
 };
 
 crearMensaje = (resultado) => {
-  let sectionMensaje = document.getElementById("mensaje");
-
-  let parrafo = document.createElement("p");
-  let spanVidaAnfitrion =
-    (parrafo.innerHTML = `Tu mascota ataco con ${habilidadAnfitrion}, la mascota del enemigo ataco con ${habilidadMaquina}: ${resultado}`);
+  
+  let parrafo = document.createElement("div");
+  sectionMensaje.textContent = "";
+  parrafo.style.display = "flex";
+  parrafo.innerHTML = `<img src="./assets/${habilidadAnfitrion}-efecto.png" alt="${habilidadAnfitrion}" /> <p>${resultado}</p> <img class="rotate" src="./assets/${habilidadMaquina}-efecto.png" alt="${habilidadMaquina}" />`;
 
   sectionMensaje.appendChild(parrafo);
 
@@ -96,33 +124,37 @@ crearMensaje = (resultado) => {
 
 resultadoEnfrenramiento = () => {
   if (habilidadMaquina == habilidadAnfitrion) {
-    crearMensaje("=> EMPATE <=");
+    crearMensaje("EMPATE");
+    empates++;
   } else if (
     (habilidadAnfitrion == "FUEGO" && habilidadMaquina == habilidades[1]) ||
     (habilidadAnfitrion == "AGUA" && habilidadMaquina == habilidades[0]) ||
     (habilidadAnfitrion == "TIERRA" && habilidadMaquina == habilidades[2])
   ) {
     vidaMaquina = vidaMaquina - 1;
-    crearMensaje("=> VIPTORY <=");
+    crearMensaje("VICTORIA");
+    victorias++;
   } else {
     vidaAnfitrion = vidaAnfitrion - 1;
-    crearMensaje("=> GAME OVER <=");
+    crearMensaje("DERROTA");
+    derotas++;
   }
 };
 resultadoFinal = () => {
-  let sectionMensaje = document.getElementById("mensaje");
-  let textFinal = document.createElement("h2");
-  if (vidaAnfitrion == 0) {
-    textFinal.innerHTML = "=> GAME OVER <= PARTIDA PERTIDA";
-    sectionMensaje.appendChild(textFinal);
-    selecHabilidad(true);
-    buttonReiniciar.style.display = 'block'
+  resultados[0].innerText = victorias;
+  resultados[1].innerText = derotas;
+  resultados[2].innerText = empates;
 
-  } else if (vidaMaquina == 0) {
-    textFinal.innerHTML = "=> VIPTORY <= PARTIDA GANADA";
-    sectionMensaje.appendChild(textFinal);
+  if (vidaAnfitrion == 0) {
+    resultado.innerText = "=> GAME OVER <=";
     selecHabilidad(true);
-    buttonReiniciar.style.display = 'block'
+    buttonReiniciar.style.display = "flex";
+    contenedorResultado.style.display = "block";
+  } else if (vidaMaquina == 0) {
+    resultado.innerText = "=> VIPTORY <=";
+    selecHabilidad(true);
+    buttonReiniciar.style.display = "flex";
+    contenedorResultado.style.display = "block";
   }
 };
 
@@ -137,6 +169,10 @@ removerClass = (opcion, elemento) => {
 vidasRestantes = () => {
   document.getElementById("vidad-anfitrion").innerHTML = vidaAnfitrion;
   document.getElementById("vidad-maquina").innerHTML = vidaMaquina;
+};
+
+mostrarRutaImagen = (ruta, id) => {
+  return (id.innerHTML = ` <img src="./assets/${ruta}.png" alt="${ruta}" />`);
 };
 
 reiniciarJuego = () => {

@@ -12,78 +12,105 @@
     <section id="seleccionar-mascotas">
       <h1 class="title">Neverwinter</h1>
 
-      <h2 class="subtitulo">Elige tu personaje:</h2>
+      <h2 class="subtitulo">
+        Elige tu personaje:<span id="personaje-selecionado"></span>
+      </h2>
 
       <div class="tarjetas">
-        <label class="tarjeta-mokepon" for="hipodoge">
-          <img src="./assets/Gul'dan.png" alt="" />
-          <p>Gul'dan</p>
-        </label>
-        <input type="radio" name="mascota" id="hipodoge" />
+        <div >
+          <label class="tarjeta-mokepon" for="Gul'dan" >
+            <img src="./assets/Gul'dan.png" alt="" data-nombre="Gul'dan"/>
+            <p>Gul'dan</p>
+          </label>
+          <input type="radio" name="mascota" id="Gul'dan" />
+        </div>
 
-        <label class="tarjeta-mokepon" for="capipepo">
-          <img src="./assets/Tyrande.png" alt="" />
-          <p>Tyrande</p>
-        </label>
-        <input type="radio" name="mascota" id="capipepo" />
+        <div>
+          <label class="tarjeta-mokepon" for="Tyrande">
+            <img src="./assets/Tyrande.png" alt="" data-nombre="Tyrande"/>
+            <p>Tyrande</p>
+          </label>
+          <input type="radio" name="mascota" id="Tyrande" />
+        </div>
 
-        <label class="tarjeta-mokepon" for="ratigueya">
-          <img src="./assets/Grommash.png" alt="" />
-          <p>Grommash</p>
-        </label>
-        <input type="radio" name="mascota" id="ratigueya" />
+        <div>
+          <label class="tarjeta-mokepon" for="Grommash">
+            <img src="./assets/Grommash.png" alt="" data-nombre="Grommash"/>
+            <p>Grommash</p>
+          </label>
+          <input type="radio" name="mascota" id="Grommash" />
+        </div>
       </div>
 
-      <button id="button-mascotas">Habilidades</button>
     </section>
 
     <section id="seleccionar-ataque">
-      <h1 class="title">Neverwinter</h1>
+      <h2>Neverwinter</h2>
 
       <h2>Elige tu ataque:</h2>
       <div class="button-abilidades">
         <div>
           <p>Fuego</p>
           <button id="button-fuego">
-            <img src="./assets/fuego.png" alt="">
+            <img src="./assets/FUEGO.png" alt="" />
           </button>
         </div>
         <div>
           <p>Agua</p>
           <button id="button-agua">
-            <img src="./assets/agua.png" alt="">
+            <img src="./assets/AGUA.png" alt="" />
           </button>
         </div>
-        
+
         <div>
           <p>Tierra</p>
           <button id="button-tierra">
-            <img src="./assets/tierra.png" alt="">
+            <img src="./assets/TIERRA.png" alt="" />
           </button>
         </div>
-     
       </div>
 
-      <div>
+      <div class="container-info-principal">
+        <div class="info-anfitrion">
+          <p class="nombre" id="nombre-personaje">nombre</p>
+          <p class="vidas" id="vidad-anfitrion">3</p>
+          <p id="personaje-anfitrion"></p>
+
+          <div class="info-habilidad">
+            <p id="nombre-ataque-anfitrion"></p>
+            <p id="img-ataque-anfitrion"></p>
+          </div>
+        </div>
+
+        <div class="info-resultado">
+          <p id="resultado">RESULTADO</p>
+          <p>Victorias</p>
+          <span>3</span>
+          <p>Derrotas</p>
+          <span>2</span>
+          <p>Empates</p>
+          <span>5</span>
+          <div id="reiniciar">
+            <button>Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="info-maquina">
+          <p class="nombre" id="nombre-mascota-enemigo">nombre</p>
+          <p class="vidas" id="vidad-maquina">3</p>
+          <p id="personaje-maquina"></p>
+
+          <div class="info-habilidad">
+            <p id="nombre-ataque-maquina"></p>
+            <p id="img-ataque-maquina"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-info-secundario">
         <section id="mensaje">
           <!-- DESDE JS -->
         </section>
-
-        <section id="reiniciar">
-          <button>Reiniciar</button>
-        </section>
-      </div>
-      
-
-      <div>
-        <p>
-          Tu mascota <span id="nombre-mascota">nombre</span> tiene
-          <span id="vidad-anfitrion">3</span> vidas
-        </p>
-        <p>
-          Las mascotas <span id="nombre-mascota-enemigo">nombre</span> del
-          enemigo tiene <span id="vidad-maquina">3</span> vidas
-        </p>
       </div>
     </section>
 
