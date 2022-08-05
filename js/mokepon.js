@@ -1,12 +1,8 @@
-const nombresMascotas = ["Gul'dan", "Tyrande", "Grommash"];
 const habilidades = ["FUEGO", "TIERRA", "AGUA"];
 let habilidadMaquina, habilidadAnfitrion;
 
 let vidaMaquina = 3, vidaAnfitrion = 3;
-
-
-const nombreAtaqueAnfitrion = document.getElementById("nombre-ataque-anfitrion");
-const nombreAtaqueMaquina = document.getElementById("nombre-ataque-maquina");
+// typeof(elemento) de que tipo es 
 
 const sectionAtaque = document.getElementById("seleccionar-ataque");
 const sectionMascotas = document.getElementById("seleccionar-mascotas");
@@ -14,22 +10,23 @@ const contenedorResultado = document.querySelector(".info-resultado");
 
 const buttonReiniciar = document.getElementById("reiniciar");
 
-const personajeAnfitrion = document.getElementById("personaje-anfitrion");
-const personajeMaquina = document.getElementById("personaje-maquina");
+const imagenPersonajeAnfitrio = document.getElementById("personaje-anfitrion");
+const nombrePersonajeAnfitrion = document.getElementById("nombre-personaje");
 
-const ataqueAnfitrion = document.getElementById("img-ataque-anfitrion");
-const ataqueMaquina = document.getElementById("img-ataque-maquina");
+const imagenPersonajeMaquina = document.getElementById("personaje-maquina");
+const nombrePersonajeMaquina = document.getElementById("nombre-mascota-enemigo");
+
+const nombreAtaqueAnfitrion = document.getElementById("nombre-ataque-anfitrion");
+const imagenAtaqueAnfitrion = document.getElementById("img-ataque-anfitrion");
+
+const nombreAtaqueMaquina = document.getElementById("nombre-ataque-maquina");
+const imagenAtaqueMaquina = document.getElementById("img-ataque-maquina");
 
 let empates = 0,
   victorias = 0,
-  derotas = 0;
+  derrotas = 0;
 
 const resultados = document.querySelectorAll(".info-resultado span");
-
-const nombreMascota = document.getElementById("nombre-mascota-enemigo");
-
-const personajeSeleccionado = document.getElementById("nombre-personaje");
-const inputMascotas = document.querySelectorAll("#seleccionar-mascotas input");
 
 const fuego = document.getElementById("button-fuego");
 const agua = document.getElementById("button-agua");
@@ -37,22 +34,80 @@ const tierra = document.getElementById("button-tierra");
 
 const sectionMensaje = document.getElementById("mensaje");
 const resultado = document.getElementById("resultado");
+const contenedorTarjetas = document.getElementById('contenedorTarjetas');
+
+let pers;
+
+let neverwinter = [];
+let opcionNeverwinter;
+class Neverwinter{
+    constructor(nombre, imagen, vida, defensa){
+      this.nombre = nombre;
+      this.imagen = imagen;
+      this.ataques = [];
+      this.vida = vida;
+      this.defensa = defensa;
+    }
+}
+let guldan =  new Neverwinter("Gul'dan","./assets/Gul'dan.png",55,90,80)
+let tyrande = new Neverwinter('Tyrande', "./assets/Tyrande.png",90,60,50)
+let grommash = new Neverwinter('Grommash',"./assets/Grommash.png",80,70,60)
+
+guldan.ataques.push(
+  {nombre: 'Agua', id: 'button-agua'},
+  {nombre: 'Agua', id: 'button-agua'},
+  {nombre: 'Agua', id: 'button-agua'},
+  {nombre: 'Fuego', id: 'button-fuego'},
+  {nombre: 'Tierra', id: 'button-tierra'}
+)
+tyrande.ataques.push(
+  {nombre: 'Agua', id: 'button-agua'},
+  {nombre: 'Fuego', id: 'button-fuego'},
+  {nombre: 'Fuego', id: 'button-fuego'},
+  {nombre: 'Fuego', id: 'button-fuego'},
+  {nombre: 'Tierra', id: 'button-tierra'}
+)
+grommash.ataques.push(
+  {nombre: 'Agua', id: 'button-agua'},
+  {nombre: 'Fuego', id: 'button-fuego'},
+  {nombre: 'Tierra', id: 'button-tierra'},
+  {nombre: 'Tierra', id: 'button-tierra'},
+  {nombre: 'Tierra', id: 'button-tierra'}
+)
+
+neverwinter.push(guldan,tyrande,grommash)
+
 
 aleatorio = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 iniciarJuego = () => {
+  neverwinter.forEach((neverwinter) =>{
+    opcionNeverwinter = `
+    <input type="radio" name="neverwinter" id=${neverwinter.nombre} />
+    <label class="tarjeta-mokepon" for=${neverwinter.nombre} >
+      <img src=${neverwinter.imagen} alt="${neverwinter.nombre}" data-nombre=${neverwinter.nombre}>
+      <p>${neverwinter.nombre}</p>
+    </label>
+    
+  `
+
+  contenedorTarjetas.innerHTML +=  opcionNeverwinter ;
+  })
+  
   sectionAtaque.style.display = "none";
   buttonReiniciar.style.display = "none";
   selecHabilidad();
   buttonReiniciar.addEventListener("click", reiniciarJuego);
+
+  
 };
 
 document.addEventListener("click", (e) => {
   if (e.target.matches(".tarjeta-mokepon img") ) {
-    personajeSeleccionado.innerText = e.target.dataset.nombre;
-    mostrarRutaImagen(e.target.dataset.nombre, personajeAnfitrion);
+    nombrePersonajeAnfitrion.innerText = e.target.dataset.nombre;
+    mostrarRutaImagen(e.target.dataset.nombre, imagenPersonajeAnfitrio);
     sectionAtaque.style.display = "flex";
     sectionMascotas.style.display = "none";
     SelecMascMaquina();
@@ -60,9 +115,9 @@ document.addEventListener("click", (e) => {
 });
 
 SelecMascMaquina = () => {
-  let num = aleatorio(1, 3) - 1;
-  nombreMascota.innerHTML = nombresMascotas[num];
-  mostrarRutaImagen(nombresMascotas[num], personajeMaquina);
+  let num = aleatorio(0, neverwinter.length-1);
+  nombrePersonajeMaquina.innerHTML = neverwinter[num].nombre;
+  imagenPersonajeMaquina.innerHTML = `<img src=${neverwinter[num].imagen} alt="${neverwinter[num].nombre}" />`;
 };
 
 //   //forEach es el metodo de recorrer un arreglo.
@@ -73,19 +128,19 @@ SelecMascMaquina = () => {
 selecHabilidad = (boolean) => {
   fuego.addEventListener("click", () => {
     habilidadAnfitrion = "FUEGO";
-    mostrarRutaImagen("FUEGO", ataqueAnfitrion);
+    mostrarRutaImagen("FUEGO", imagenAtaqueAnfitrion);
     nombreAtaqueAnfitrion.innerText = "FUEGO";
     selecHabilidadMaquina();
   });
   agua.addEventListener("click", () => {
     habilidadAnfitrion = "AGUA";
-    mostrarRutaImagen("AGUA", ataqueAnfitrion);
+    mostrarRutaImagen("AGUA", imagenAtaqueAnfitrion);
     nombreAtaqueAnfitrion.innerText = "AGUA";
     selecHabilidadMaquina();
   });
   tierra.addEventListener("click", () => {
     habilidadAnfitrion = "TIERRA";
-    mostrarRutaImagen("TIERRA", ataqueAnfitrion);
+    mostrarRutaImagen("TIERRA", imagenAtaqueAnfitrion);
     nombreAtaqueAnfitrion.innerText = "TIERRA";
     selecHabilidadMaquina();
   });
@@ -104,7 +159,7 @@ selecHabilidad = (boolean) => {
 selecHabilidadMaquina = () => {
   let num = aleatorio(1, 3) - 1;
   habilidadMaquina = habilidades[num];
-  mostrarRutaImagen(habilidades[num], ataqueMaquina);
+  mostrarRutaImagen(habilidades[num], imagenAtaqueMaquina);
   nombreAtaqueMaquina.innerText = habilidades[num];
   resultadoEnfrenramiento();
   resultadoFinal();
@@ -137,12 +192,12 @@ resultadoEnfrenramiento = () => {
   } else {
     vidaAnfitrion = vidaAnfitrion - 1;
     crearMensaje("DERROTA");
-    derotas++;
+    derrotas++;
   }
 };
 resultadoFinal = () => {
   resultados[0].innerText = victorias;
-  resultados[1].innerText = derotas;
+  resultados[1].innerText = derrotas;
   resultados[2].innerText = empates;
 
   if (vidaAnfitrion == 0) {
@@ -172,7 +227,7 @@ vidasRestantes = () => {
 };
 
 mostrarRutaImagen = (ruta, id) => {
-  return (id.innerHTML = ` <img src="./assets/${ruta}.png" alt="${ruta}" />`);
+  return (id.innerHTML = `<img src="./assets/${ruta}.png" alt="${ruta}" />`);
 };
 
 reiniciarJuego = () => {

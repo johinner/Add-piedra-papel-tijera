@@ -22,21 +22,14 @@ input{
 }
 
 .subtitulo{
-    font-size: 20px;
+    font-size: 15px;
 }
+
 .tarjetas{
     display: flex;
     gap: 10px;
-}#button-mascotas{
-    font-size: 16px;
-    color: white;
-    background: #62374E;
-    width: 150px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px 0px black;
 }
+
 .tarjeta-mokepon{
     background: #007880;
     padding: 10px;
@@ -46,52 +39,29 @@ input{
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    
+    transition: all 400ms;
 }
 .tarjeta-mokepon img{
-    object-fit: cover;
     width:100%;
     height:100%;
-    transition: all 400ms;
-    position: relative;
 }
 
-.tarjeta-mokepon img:hover{
-    border-top: #000000;
-    cursor: pointer;
-    transform: scale(1.09);
-}
 .tarjeta-mokepon p{
     text-align: center;
 }
 
-
-#button-mascotas{
-    width: 200px;
-    height: 40px;
-    margin-top: 30px;
-    font-family: 'Press Start 2P' ,cursive;
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: white;
-
+.tarjetas input:hover + label {
+    background-color: #5d8af498;
     cursor: pointer;
-    background: #62374E;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 0px 4px 0px #fdc57b;
-}
-#button-mascotas:hover{
-   background-color: #8d2f63bd;
-} 
+    transform: scale(1.05);
+  }
+
+
+
 /* pagina ataque */
 #seleccionar-ataque{
     flex-direction: column;
     align-items: center;
-}
-#seleccionar-ataque h2{
-    font-size: 1rem
 }
 
 .button-abilidades{
@@ -102,7 +72,6 @@ input{
 .button-abilidades button{
     background-color: rgba(255, 255, 255, 0);
     border: none;
-    
 }
 .button-abilidades p{
     font-family: 'Press Start 2P', cursive;
@@ -111,13 +80,13 @@ input{
     text-align: center;
     margin: 5px;
 }
-.button-abilidades button img{
+.button-abilidades img{
     width: 80px;
     border-radius: 50%;
     transition: all 500ms;
     cursor: pointer;
 }
-.button-abilidades button img:hover{
+.button-abilidades img:hover{
     transform: scale(1.2);
 }
 
@@ -199,21 +168,15 @@ input{
     margin-top: 5px;
 }
 .info-resultado button{
-    margin-top: 10px;
     width: 100%;
-    height: 30px;
-    font-family: 'Press Start 2P', cursive;
-
-    font-size: 12px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
     color: white;
-
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 30px;
     cursor: pointer;
-    background: #614c25b7;
-    border: none;
-    border-radius: 5px;
-    border-left: 4px solid;
-    border-right: 4px solid;
-    transition: all, 100ms;
 }
 .info-resultado button:hover{
     border-left: 15px solid;
