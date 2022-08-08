@@ -16,28 +16,24 @@
         Elige tu personaje:<span id="personaje-selecionado"></span>
       </h2>
 
-      <div id="contenedorTarjetas" class="tarjetas">
-      </div>
-
+      <div id="contenedorTarjetas" class="tarjetas"></div>
     </section>
 
     <section id="seleccionar-ataque">
       <h2>Neverwinter</h2>
 
-      <h2 class="subtitulo">Elige tu ataque:</h2>
+      <h2 class="subtitulo">Elige tu secuencia de ataque:</h2>
       <div class="button-abilidades" id="section-habilidades">
         <!-- desde javaScrip -->
       </div>
 
       <div class="container-info-principal">
-        <div class="info-anfitrion">
-          <p class="nombre" id="nombre-personaje">nombre</p>
-          <p class="vidas" id="vidad-anfitrion">3</p>
-          <p id="personaje-anfitrion"></p>
-
-          <div class="info-habilidad">
-            <p id="nombre-ataque-anfitrion"></p>
-            <p id="img-ataque-anfitrion"></p>
+        <div class="card">
+          <div class="card-info">
+            <p class="card-info-nombre" id="nombre-personaje">nombre</p>
+            <p id="personaje-anfitrion"></p>
+          </div>
+          <div class="card-ataque" id="img-ataque-anfitrion">
           </div>
         </div>
 
@@ -53,15 +49,14 @@
             <button>Reiniciar</button>
           </div>
         </div>
+        
+        <div class="card">
+          <div class="card-ataque" id="img-ataque-maquina">
+          </div>
 
-        <div class="info-maquina">
-          <p class="nombre" id="nombre-mascota-enemigo">nombre</p>
-          <p class="vidas" id="vidad-maquina">3</p>
-          <p id="personaje-maquina"></p>
-
-          <div class="info-habilidad">
-            <p id="nombre-ataque-maquina"></p>
-            <p id="img-ataque-maquina"></p>
+          <div class="card-info">
+            <p class="card-info-nombre" id="nombre-mascota-enemigo">nombre</p>
+            <p id="personaje-maquina"></p>
           </div>
         </div>
       </div>
