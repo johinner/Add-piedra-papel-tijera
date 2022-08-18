@@ -3,6 +3,7 @@ body{
     font-family: 'Press Start 2P', cursive;
     background-color: #33313B;
     color: white;
+    box-sizing: border-box;
 }
 input{
     display: none;
@@ -102,13 +103,13 @@ input{
 .card-info{
     width: 160px;
     height: 250px;
-    box-shadow: inset 0px 0px 10px 0px rgba(255, 0, 0, 0.712);
     border-radius: 10px;
-    background-color: #963c3c7c;
-}
-.card-info{
     background-color: #3862377c;
     box-shadow: inset 0px 0px 10px 0px rgba(0, 255, 21, 0.63);
+}
+.card-info-rival{
+    background-color: #963c3c7c;
+    box-shadow: inset 0px 0px 10px 0px rgba(255, 0, 0, 0.712);
 }
 .card-info-nombre{
     padding-top: 10px;
@@ -181,6 +182,17 @@ input{
 
 #mensaje{
     padding-top: 30px;
+}
+
+#ver-mapa{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mapa{
+    border: 2px solid beige;
+    /* height: 90vh;
+    width: 100%; */
 }
 @media(max-width:360px){
     .tarjetas{

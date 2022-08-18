@@ -1,5 +1,5 @@
 let habilidadMaquina, habilidadAnfitrion;
-let PersonajeAleatorio;
+let personajeAleatorio;
 let vidaMaquina, vidaAnfitrion;
 // typeof(elemento) de que tipo es
 
@@ -7,6 +7,12 @@ const sectionAtaque = document.getElementById("seleccionar-ataque");
 const sectionMascotas = document.getElementById("seleccionar-mascotas");
 const contenedorResultado = document.querySelector(".info-resultado");
 const sectionHabilidades = document.getElementById("section-habilidades");
+const sectionMapa = document.getElementById('ver-mapa');
+const mapa = document.getElementById('mapa');
+
+let anchoDelMapa = window.innerWidth;
+let altoDelMapa = window.innerHeight;
+
 
 const buttonReiniciar = document.getElementById("reiniciar");
 
@@ -14,9 +20,7 @@ const imagenPersonajeAnfitrio = document.getElementById("personaje-anfitrion");
 const nombrePersonajeAnfitrion = document.getElementById("nombre-personaje");
 
 const imagenPersonajeMaquina = document.getElementById("personaje-maquina");
-const nombrePersonajeMaquina = document.getElementById(
-  "nombre-mascota-enemigo"
-);
+const nombrePersonajeMaquina = document.getElementById("nombre-mascota-enemigo");
 
 const imagenAtaqueAnfitrion = document.getElementById("img-ataque-anfitrion");
 
@@ -26,13 +30,20 @@ let empates = 0,
   victorias = 0,
   derrotas = 0;
 
-let contadorYamado = 0
+let contadorLlamado = 0
 
 const resultados = document.querySelectorAll(".info-resultado span");
 
 const sectionMensaje = document.getElementById("mensaje");
 const resultado = document.getElementById("resultado");
 const contenedorTarjetas = document.getElementById("contenedorTarjetas");
+
+let lienzo = mapa.getContext('2d');
+let mapaBackground = new Image(); mapaBackground.src = './assets/fondo.jpg';
+
+let imgFlecha = new Image(); imgFlecha.src = './assets/flecha.png';
+let IntervalFlecha;
+let flechaEnX = mapa.width/2.3, flechaEnY = 150;
 
 let pers;
 let secuenciaAnfitrion = [];
@@ -49,6 +60,23 @@ class Neverwinter {
     this.habilidades = [];
     this.vida = vida;
     this.defensa = defensa;
+    this.x = 200;
+    this.y = 5;
+    this.alto = 130;
+    this.ancho = 110;
+    this.mapaImagen = new Image();
+    this.mapaImagen.src = imagen;
+
+  }
+  
+  pintarImagen(){
+  lienzo.drawImage(
+    this.mapaImagen,
+    this.x,
+    this.y,
+    this.ancho,
+    this.alto
+    )
   }
 }
 let guldan = new Neverwinter("Gul'dan", "./assets/Gul'dan.png", 90, 80);
@@ -144,28 +172,33 @@ aleatorio = (min, max) => {
 };
 
 iniciarJuego = () => {
+
+    unirseAlJuego();
+
   neverwinter.forEach((neverwinter) => {
     opcionNeverwinter = `
-    <input type="radio" name="neverwinter" id=${neverwinter.nombre} />
+    <input type="radio" data-nombre=${neverwinter.nombre} name="neverwinter" id=${neverwinter.nombre} />
     <label class="tarjeta-mokepon" for=${neverwinter.nombre} >
-      <img src=${neverwinter.imagen} alt="${neverwinter.nombre}" data-nombre=${neverwinter.nombre}>
+      <img src=${neverwinter.imagen} alt="${neverwinter.nombre}">
       <p>${neverwinter.nombre}</p>
     </label> 
   `;
     contenedorTarjetas.innerHTML += opcionNeverwinter;
   });
+  sectionMapa.style.display = 'none';
   sectionAtaque.style.display = "none";
   buttonReiniciar.style.display = "none";
   buttonReiniciar.addEventListener("click", reiniciarJuego);
 };
 
 document.addEventListener("click", (e) => {
-  if (e.target.matches(".tarjeta-mokepon img")) {
+  if (e.target.matches("#contenedorTarjetas input")) {
     nombrePersonajeAnfitrion.innerText = e.target.dataset.nombre;
-    mostrarRutaImagen(e.target.dataset.nombre, imagenPersonajeAnfitrio);
-
-    sectionAtaque.style.display = "flex";
     sectionMascotas.style.display = "none";
+    dibujarMapa(e.target.dataset.nombre)
+
+    mostrarRutaImagen(e.target.dataset.nombre, imagenPersonajeAnfitrio);
+    
     renderizarhabilidades(e.target.dataset.nombre);
     selecPersonajeMaquina();
   }
@@ -174,6 +207,100 @@ document.addEventListener("click", (e) => {
     e.target.parentNode.parentNode.textContent = "";
   }
 });
+
+unirseAlJuego = () => {
+  fetch('http://localhost:8081/unirse')
+    .then((res)=>{
+      if(res.ok){
+        res.text()
+        .then((res)=>{
+          console.log(res)
+        })
+      }
+    })
+}
+
+renderImagen = (x) =>{
+  if (anchoDelMapa > 550){
+    mapa.width = anchoDelMapa-500;
+    mapa.height = altoDelMapa -80;
+    console.log(anchoDelMapa , altoDelMapa)
+  }else if (anchoDelMapa < 500){
+    mapa.width = anchoDelMapa-30;
+    mapa.height = altoDelMapa -150;
+  }
+  lienzo.clearRect(0, 0, mapa.width, mapa.height )
+  
+  lienzo.drawImage(mapaBackground,0,0,mapa.width,mapa.height)
+
+  x.pintarImagen()
+  revisarColision(x)
+
+    lienzo.drawImage(imgFlecha,flechaEnX,flechaEnY,100,100);
+    if(flechaEnY < mapa.height-100){
+      flechaEnY +=20
+    }
+}
+
+dibujarMapa = (personaje) => {
+  neverwinter.forEach(x=>{
+    if (personaje == x.nombre){
+      renderImagen(x)
+      eventoTecladoFlechas(x);
+    }
+  })
+  sectionMapa.style.display = 'flex'; 
+}
+
+revisarColision = (x) =>{
+  mapa.style.border = '3px solid beige'
+  if(x.x <= 0 || x.y <=0){
+    mapa.style.border = '3px solid red'
+
+  }
+  if((x.x+x.ancho) >= mapa.width || (x.y+x.alto)>=mapa.height){
+    mapa.style.border = '3px solid red'
+    if(x.x >= 180 && x.x <= 210 && (x.y+x.alto) >= mapa.height){
+      mapa.style.border = '3px solid blue'
+
+    if(x.y> mapa.height){
+      console.log('ok')
+      sectionAtaque.style.display = "flex";
+      sectionMapa.style.display = 'none'
+    }
+  }
+}
+}
+
+eventoTecladoFlechas = (x) => {
+  window.addEventListener("keydown", e => {
+    switch (e.keyCode) {
+      case 38 || 87:
+        //arriba 
+        x.y = x.y - 10
+        renderImagen(x)
+        break;
+      case 40 || 83:
+        //abajo
+        x.y = x.y + 10
+        renderImagen(x)
+        break;
+      case 37 || 65:
+        //izquierda
+        x.x = x.x - 10
+        renderImagen(x)
+        break;
+      case 39 || 68:
+        //derrecha
+        x.x = x.x + 10
+        renderImagen(x)
+        break;
+        default:
+          break;
+    }
+})
+}
+
 
 secuenciaSeleccion = (ataque) => {
   secuenciaAnfitrion.push(ataque);
@@ -215,10 +342,10 @@ obtenerVidas = (personaje, peticion) => {
 };
 
 selecPersonajeMaquina = () => {
-  PersonajeAleatorio = aleatorio(0, neverwinter.length - 1);
-  nombrePersonajeMaquina.innerHTML = neverwinter[PersonajeAleatorio].nombre;
-  imagenPersonajeMaquina.innerHTML = `<img src=${neverwinter[PersonajeAleatorio].imagen} alt="${neverwinter[PersonajeAleatorio].nombre}" />`;
-  obtenerVidas(neverwinter[PersonajeAleatorio].nombre, "maquina");
+  personajeAleatorio = aleatorio(0, neverwinter.length - 1);
+  nombrePersonajeMaquina.innerHTML = neverwinter[personajeAleatorio].nombre;
+  imagenPersonajeMaquina.innerHTML = `<img src=${neverwinter[personajeAleatorio].imagen} alt="${neverwinter[personajeAleatorio].nombre}" />`;
+  obtenerVidas(neverwinter[personajeAleatorio].nombre, "maquina");
 };
 
 renderizarhabilidades = (personaje) => {
@@ -238,24 +365,13 @@ renderizarhabilidades = (personaje) => {
 };
 //ID.checked == true)
 //     ID.disabled = false;
-selecHabilidadMaquina = () => {
-  let longitudArray = neverwinter[PersonajeAleatorio].habilidades.length;
-  let AleatorioHabilidad = aleatorio(0, longitudArray - 1);
-  let nombre =
-    neverwinter[PersonajeAleatorio].habilidades[AleatorioHabilidad].nombre;
-  let png = neverwinter[PersonajeAleatorio].habilidades[AleatorioHabilidad].png;
-  let efecto =
-    neverwinter[PersonajeAleatorio].habilidades[AleatorioHabilidad].pngEfecto;
-
-  imagenHabilidaMaquina.innerHTML = `<img src=${png} alt="${nombre}" />`;
-};
 
 crearMensaje = (resultado) => {
   let parrafo = document.createElement("div");
   parrafo.style.display = "flex";
-  parrafo.innerHTML = `<img src="./assets/${secuenciaAnfitrion[contadorYamado]}-efecto.png" alt="${secuenciaAnfitrion[contadorYamado]}" /> <p>${resultado}</p> <img class="rotate" src="./assets/${secuenciaMaquina[contadorYamado]}-efecto.png" alt="${secuenciaMaquina[contadorYamado]}" />`;
+  parrafo.innerHTML = `<img src="./assets/${secuenciaAnfitrion[contadorLlamado]}-efecto.png" alt="${secuenciaAnfitrion[contadorLlamado]}" /> <p>${resultado}</p> <img class="rotate" src="./assets/${secuenciaMaquina[contadorLlamado]}-efecto.png" alt="${secuenciaMaquina[contadorLlamado]}" />`;
   sectionMensaje.appendChild(parrafo);
-  contadorYamado++
+  contadorLlamado++
 };
 
 Enfrenramiento = () => {
